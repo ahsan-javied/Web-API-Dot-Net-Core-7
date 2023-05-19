@@ -1,0 +1,22 @@
+.button {
+  background-color: #4558FF;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 5px;
+  box-shadow: none;
+  border: none;
+  text-decoration: none;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+}

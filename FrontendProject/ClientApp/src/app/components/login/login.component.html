@@ -1,0 +1,28 @@
+<section class="user-page">
+  <div class="container">
+    <div class="user--card">
+      <h2 class="user-head">{{head}}</h2>
+      <p class="user-title">{{title}}</p>
+      <form class="user-form" method="POST">
+        <div class="user-group">
+          <input type="email" class="user-control" placeholder="Email">
+        </div>
+        <div class="user-group">
+          <input type="password" class="user-control" placeholder="Password">
+        </div>
+        <div class="user-group user-flex">
+          <label for="remember">Remember Me</label>
+          <input type="checkbox" id="remember" class="user-control user-checkbox">
+        </div>
+        <div class="user-button">
+          <button type="submit" class="button">Login</button>
+        </div>
+      </form>
+      <div class="line-divider"></div>
+      <div class="user-button" style="margin-top: 20px;">
+        <a routerLink="/register" class="button">Register</a>
+        <p class="user-text">Don't have an account?</p>
+      </div>
+    </div>
+  </div>
+</section>
