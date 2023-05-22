@@ -13,7 +13,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API.Helpers.Middlewares
+namespace WebAPI.Helpers.Middlewares
 {
     public class RequestHandelerMiddleware
     {

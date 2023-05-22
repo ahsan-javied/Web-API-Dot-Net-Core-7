@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Services.Helpers;
 using Services.User;
 
-namespace API.Helpers
+namespace WebAPI.Helpers
 {
     public static class ServiceDependency
     {
@@ -14,12 +14,9 @@ namespace API.Helpers
             services.AddSingleton<IJWTManager, JWTManager>();
 
             //AddScoped
-            services.AddScoped<IJWTManager, JWTManager>();
-
 
             //Unit of Work or repository is always transient as it does not then make cache issues.
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-
             services.AddTransient<IUserService, UserService>();
 
         }

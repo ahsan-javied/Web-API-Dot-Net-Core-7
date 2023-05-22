@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Models.DTO.User;
 
-namespace API.Helpers.FilterHandlers
+namespace WebAPI.Helpers.FilterHandlers
 {
     public class AuthorizeAttribute : Attribute, IAuthorizationFilter
     {

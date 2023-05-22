@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO.User;
-using Newtonsoft.Json;
 using Services.User;
-using System.Threading.Tasks;
 
-namespace API.Controllers
+namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -18,7 +15,7 @@ namespace API.Controllers
         public UsersController(IUserService userService, IHttpContextAccessor accessor)
         {
             _userService = userService;
-            _loggedInUser = (AuthenticatedUserDTO)accessor.HttpContext.Items["User"];
+            _loggedInUser = (AuthenticatedUserDTO)accessor?.HttpContext?.Items["User"];
         }
 
         [HttpPost("signup")]

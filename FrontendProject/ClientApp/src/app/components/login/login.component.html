@@ -3,7 +3,7 @@
     <div class="user--card">
       <h2 class="user-head">{{head}}</h2>
       <p class="user-title">{{title}}</p>
-      <form class="user-form" method="POST">
+      <form class="user-form" [formGroup]="loginForm" (ngSubmit)="login()" method="post">
         <div class="user-group">
           <input type="email" class="user-control" placeholder="Email">
         </div>
