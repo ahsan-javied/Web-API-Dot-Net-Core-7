@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
   tilte:"Dev Environment",
-  server: 'https://localhost:7206',
+  server: 'https://localhost:7206/',
   apiUrl: "api",
 };

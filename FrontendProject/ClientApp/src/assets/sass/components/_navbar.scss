@@ -1,0 +1,38 @@
+.main-navbar {
+  background-color: white;
+  z-index: 999;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 2rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+
+  a {
+    text-decoration: none;
+  }
+
+  .navbar {
+    &-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      position: relative;
+    }
+
+    &-item {
+      &:not(:last-of-type) {
+        margin-right: 20px;
+      }
+    }
+
+    &-link {
+      font-size: 16px;
+      font-weight: 400;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      position: relative;
+      text-align: center;
+      color: #222;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/@core/services/implementation/auth.service';
+import { LoginModel } from 'src/app/@core/models/user/user.model';
+import { AuthService } from 'src/app/@core/services/implementation/user/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,37 +14,41 @@ export class LoginComponent implements OnInit {
   title = "Welcome back! Enter your email and password below to sign in.";
   email: string = '';
   password: string = '';
+  ValidationErrors: string = '';
+  isProcessing: boolean = false;
   loginForm: FormGroup = this.formBuilder.group({
-    //email: [ this.tmpMail, [Validators.required, Validators.pattern(EmailPattern)]],
-    email: ['', Validators.compose([Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$')])],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
+    email: [this.email, [Validators.required, Validators.email]],
+    password: [this.password, [Validators.required, Validators.minLength(5), Validators.maxLength(8)]],
   });
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
-  ngOnInit(): void {
-    
-
+  ngOnInit() {
   }
 
-  login(): void {
+  onSubmit() {
+    this.ValidationErrors = '';
 
-    if (this.loginForm.invalid) {
-      return;
+    if (this.loginForm.valid) {
+      const credentials = new LoginModel();
+      credentials.username = this.loginForm.value.email;
+      credentials.password = this.loginForm.value.password;
+
+      this.authService.login(credentials)
+        .then((data) => {
+          if (data) {
+          }
+          else {
+            this.ValidationErrors = "Login failed.";
+          }
+        })
+        .catch((error: any) => {
+          this.ValidationErrors = "Login failed.";
+          console.log(error.toString());
+        })
+        .finally(() => {
+          this.isProcessing = false;
+        });
     }
-
-    this.authService.login(this.email, this.password)
-    .subscribe(
-      isAuthenticated => {
-        if (isAuthenticated) {
-          console.log('Login successful');
-          // Redirect to the desired page or perform any necessary actions upon successful login
-        } else {
-          console.log('Login failed');
-          // Show an error message or perform any necessary actions upon failed login
-        }
-      }
-    );
   }
 }
-
