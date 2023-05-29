@@ -28,7 +28,7 @@ import { CoreModule } from './@core/core.module';
     HttpClientModule,
   ],
   providers: [
-    //{ provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

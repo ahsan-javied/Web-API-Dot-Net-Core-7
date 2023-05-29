@@ -16,7 +16,7 @@
           <input type="password" formControlName="password" class="user-control" placeholder="Password">
           <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
             <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</div>
-            <div *ngIf="loginForm.get('password')?.errors">Password must be between 1 to 4</div>
+            <div *ngIf="loginForm.get('password')?.errors">Password must be between 5 to 8</div>
           </div>
         </div>
         <div class="user-group">

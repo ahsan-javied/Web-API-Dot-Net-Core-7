@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginModel } from 'src/app/@core/models/user/user.model';
 import { AuthService } from 'src/app/@core/services/implementation/user/auth.service';
 
@@ -21,7 +22,9 @@ export class LoginComponent implements OnInit {
     password: [this.password, [Validators.required, Validators.minLength(5), Validators.maxLength(8)]],
   });
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService,
+    public router: Router
+    ) { }
 
   ngOnInit() {
   }
@@ -37,6 +40,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(credentials)
         .then((data) => {
           if (data) {
+            this.router.navigate(['\home']);
           }
           else {
             this.ValidationErrors = "Login failed.";

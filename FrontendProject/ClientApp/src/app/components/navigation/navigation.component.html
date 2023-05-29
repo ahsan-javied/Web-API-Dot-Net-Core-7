@@ -4,7 +4,8 @@
             <a href="/home" class="navbar-link">Home</a>
         </li>
         <li class="navbar-item">
-            <a href="/login" class="navbar-link">Login</a>
+            <a *ngIf="!ifLogedIn" href="/login" class="navbar-link">Login</a>
+            <a *ngIf="ifLogedIn" href="javascript:void(0)" (click)="logoff()" class="navbar-link">Logout</a>
         </li>
     </ul>
 </nav>

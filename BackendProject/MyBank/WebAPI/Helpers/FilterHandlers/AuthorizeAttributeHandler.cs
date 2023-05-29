@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using Models.DTO.User;
+using Models.Common;
 
 namespace WebAPI.Helpers.FilterHandlers
 {
@@ -10,10 +9,15 @@ namespace WebAPI.Helpers.FilterHandlers
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var user = (AuthenticatedUserDTO)context.HttpContext.Items["User"];
+            var user = context?.HttpContext?.Items["User"] as AuthenticatedUserDTO;
             if (user == null)
             {
-                context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+                context.Result = new JsonResult(
+                    new APIResponse(
+                        false, StatusCodes.Status401Unauthorized, "Unauthorized"
+                        , null
+                        )
+                    );
             }
         }
     }

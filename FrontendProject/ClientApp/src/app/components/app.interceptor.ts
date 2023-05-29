@@ -33,23 +33,23 @@ export class AppInterceptor implements HttpInterceptor {
 
     // Pass the modified request to the next handler
 
-    return next.handle(request).pipe(
-      catchError((error: HttpErrorResponse) => {
-        // if (error.status === 200) {}
-        // else if (error.status === 201) {}
-        //else  
-        if (error.status === 400) {
-          // Handle the 400 response here
-          // You can access the error details using error.error
-          console.log('Bad request:', error.error);
-          // You can also throw a custom error or return a specific response
-          return throwError(() => new Error(error.error || 'server error.'));
-        }
+    // return next.handle(request).pipe(
+    //   catchError((error: HttpErrorResponse) => {
+    //     // if (error.status === 200) {}
+    //     // else if (error.status === 201) {}
+    //     //else  
+    //     if (error.status === 400) {
+    //       // Handle the 400 response here
+    //       // You can access the error details using error.error
+    //       console.log('Bad request:', error.error);
+    //       // You can also throw a custom error or return a specific response
+    //       return throwError(() => new Error(error.error || 'server error.'));
+    //     }
 
-        // For other error status codes, re-throw the error
-        return throwError(() => new Error(error.message || 'server error.'));
-      })
-    );
+    //     // For other error status codes, re-throw the error
+    //     return throwError(() => new Error(error.message || 'server error.'));
+    //   })
+    // );
 
 
     return next.handle(request)
@@ -61,7 +61,6 @@ export class AppInterceptor implements HttpInterceptor {
             // if (event.body.message === 'OK') {
             event.clone({ body: event.body.result });
             return event;
-
           }
           if (event instanceof HttpErrorResponse) {
             if (event.error instanceof ErrorEvent) {
@@ -70,7 +69,6 @@ export class AppInterceptor implements HttpInterceptor {
               console.log(`error status : ${event.status} ${event.statusText}`);
               switch (event.status) {
                 case 400:      //login
-
                   break;
                 case 401:      //login
                   break;

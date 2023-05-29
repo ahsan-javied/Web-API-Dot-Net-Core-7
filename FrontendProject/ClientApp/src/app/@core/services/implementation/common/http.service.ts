@@ -29,10 +29,6 @@ export class HttpService extends HttpServiceInterface {
   }
 
   getSingle<T>(serviceEndpoint: string, data: any): Observable<T> {
-    data.browser = this.config.Browser;
-    data.ipAddress = this.config.IpAddress;
-    data.device = this.config.Device;
-
     return this.http.get<T>(this.apiUrl + serviceEndpoint + '/' + data)
     .pipe(
       catchError(this.handleError)
@@ -41,8 +37,11 @@ export class HttpService extends HttpServiceInterface {
 
 
   post<T>(serviceEndpoint: string, data: any): Observable<T> {
+    data.browser = '';
     data.browser = this.config.Browser;
+    data.ipAddress = '';
     data.ipAddress = this.config.IpAddress;
+    data.device = '';
     data.device = this.config.Device;
     
     return this.http.post<T>(this.apiUrl + serviceEndpoint, data)

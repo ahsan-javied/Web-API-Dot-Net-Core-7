@@ -13,18 +13,19 @@ export class AuthService implements AuthenticationInterface {
 
   login(credentials: LoginModel): Promise<boolean> {
     return new Promise(resolve => {
-      this.httpService.post<AuthenticatedUserModel>('users/authenticate', credentials)
+      this.httpService.post<any>('users/authenticate', credentials)
         .subscribe((data) => {
           if (data) {
-            let user = data;
-            user.token = '';
-            this.localStorageService.setItem('x-user', JSON.stringify(user));
-            this.localStorageService.setItem('x-token', data?.token);
-            resolve(true);
+            if(data?.code == 201){
+              this.localStorageService.setItem('x-token', data?.result?.token);
+              let user = data.result;
+              user.token = '';
+              this.localStorageService.setItem('x-user', JSON.stringify(user));
+              resolve(true);
+              return;
+            }
           }
-          else {
-            resolve(false);
-          }
+          resolve(false);
         });
     });
   }

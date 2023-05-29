@@ -14,25 +14,30 @@ export class UserService {
       this.httpService.post<any>('users/signup', details)
         .subscribe((data) => {
           if (data) {
-            resolve(data);
+            if(data?.code == 200){
+              resolve(data.result);
+              return;
+            }
           }
-          else {
-            resolve(null);
-          }
+          resolve(null);
         });
     });
   }
 
   getUserBalance(): Promise<UserModel | null> {
     return new Promise(resolve => {
-      this.httpService.getSingle<UserModel>('users/auth/balance', '')
+      this.httpService.getSingle<any>('users/auth/balance', '')
         .subscribe((data) => {
           if (data) {
-            resolve(data);
+            if(data?.code == 201){
+              let user: UserModel = new UserModel();
+              user.balance = data?.result;
+              
+              resolve(user);
+              return;
+            }
           }
-          else {
-            resolve(null);
-          }
+          resolve(null);
         });
     });
   }

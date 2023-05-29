@@ -42,6 +42,7 @@ export class SignupComponent implements OnInit {
       this.userService.signup(credentials)
         .then((data) => {
           if (data) {
+            this.ValidationErrors = "Signup Successful. You may login now.";
           }
           else {
             this.ValidationErrors = "Signup failed.";
